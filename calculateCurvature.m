@@ -22,7 +22,7 @@ function curvature = calculateCurvature(points)
         denominator = (dx(i)^2 + dy(i)^2)^(3/2);
         curvature(i) = numerator / denominator;
     end
-    
+    % Looked this up on stack exchange, seems to check out? 
     % Handle curvature array to match points array, if needed
     % This step depends on how you want to align the curvature values with your points
     % One approach is to replicate the curvature at the ends

@@ -1,7 +1,8 @@
 close all
 clear all
 clc
-
+% This reads in the curvature PCA information, but it doesn't do anything
+% with it? 
 % Standard plot stuff remove/change as needed
 set(0,'DefaultAxesLineStyleOrder','-|-.|--|:','DefaultLineLineWidth',2)
 set(0,'DefaultLineMarkerSize',20) % Change this to change the size of the marker

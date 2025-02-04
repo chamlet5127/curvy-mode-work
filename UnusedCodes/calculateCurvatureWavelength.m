@@ -1,4 +1,6 @@
 function wavelength = calculateCurvatureWavelength(x, y)
+    % Takes in (x,y) coordinates of a 2D curve and outputs the curvature
+    % wavelength
     % Check if input vectors are the same length
     if length(x) ~= length(y)
         error('x and y must be the same length');
