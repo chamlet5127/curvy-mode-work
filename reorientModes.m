@@ -2,6 +2,9 @@ close all
 clear all
 clc
 
+% This tries to plot all of the modes in the same orientation, 
+% i.e. makes them all have the same sign convention 
+
 set(0,'DefaultAxesLineStyleOrder','-|-.|--|:','DefaultLineLineWidth',2)
 set(0,'DefaultLineMarkerSize',10) % Change this to change the size of the marker
 set(0,'DefaultTextFontSize',18)
