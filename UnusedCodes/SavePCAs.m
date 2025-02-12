@@ -16,6 +16,9 @@ fnamesSL150=["SL150N4","SL150NF","SL150N4x10"];
 dirnames = ["VisNorm","Vis2x","Vish"];
 
 % % 
+% u%, E%, V% are the SVD, kappa is the raw curvature, smoothed Kappa is the
+% curvature passed through a filter and with the mean subtracted
+
 [u1,E1,V1,kappa,smoothedKappa] = PCA_curve_fn(fullfile('./','VisNorm','AO50NF'));
 writematrix(u1,'u_AO50NF_VisNorm.csv');
 writematrix(smoothedKappa,'smooth_curve_AO50NF_VisNorm.csv');

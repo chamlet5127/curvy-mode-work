@@ -1,13 +1,21 @@
 function [u,E,V,kappa_val,smoothedKappa] = PCA_curve_fn(file_name)
 [filepath,name,ext] = fileparts(file_name);
+%Basic file information. If these aren't correct for the file then it could
+%very well be that there is something wrong with the file. 
+
 nfr=600;
 npt=321;
 nlines=4;
 
+%Read in the xy values, they're ordered in such a way there is left, right,
+% then m and n (two interculated sets of points) on the center.
 XY = dlmread(file_name);
 
 x_vals = reshape(XY(:,1),4*npt,nfr);
 y_vals = reshape(XY(:,2),4*npt,nfr);
+
+% For the midline just use one set of centerline points. But both sets get
+% used to find the center of mass
 
 xm = x_vals(1:npt,:);
 xn = x_vals(npt+1:2*npt,:);  % Need this one
@@ -49,23 +57,25 @@ for j = 1:nfr
 
     kappa_val(:,j)=calculateCurvature([x_new(:,j) y_new(:,j)]);
 
-
-    % % windowSize = 10; % Adjust the window size as needed
-    % % b = (1/windowSize)*ones(1,windowSize);
-    % % a = 1;
-    % % smoothedKappa(:,j) = filter(b, a, kappa_val(:,j));
-
+    % Used a butterworth filter, from reading it looked like it was a good
+    % one? 
     n = 1; % Order of the filter
-    Wn = 0.1; % Normalized cutoff frequency (between 0 and 1, where 1 corresponds to half the sampling rate)
+    
+    Wn = 0.1; 
+    % Normalized cutoff frequency (between 0 and 1, where 1 corresponds to half the sampling rate)
     [b, a] = butter(n, Wn, 'low'); % Design the filter
 
     % Apply the filter to the curvature
     smoothedKappa(:,j) = filtfilt(b, a, kappa_val(:,j));
 
 end
+
+%Calculate and subtract the mean
 meanKappa = mean(smoothedKappa,2);
 smoothedKappa=smoothedKappa-meanKappa;
 [u,E,V]=svd(smoothedKappa);
+
+end
 
 % Plot the original and smoothed curvature
 % % figure(2);
@@ -83,5 +93,7 @@ smoothedKappa=smoothedKappa-meanKappa;
 % % hold off
 % % pause(0.1)
 
-end
-
+    % % windowSize = 10; % Adjust the window size as needed
+    % % b = (1/windowSize)*ones(1,windowSize);
+    % % a = 1;
+    % % smoothedKappa(:,j) = filter(b, a, kappa_val(:,j));
