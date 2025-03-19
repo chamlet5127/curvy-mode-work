@@ -51,5 +51,10 @@ for i = 1:length(dirnames);
             end
         end
         period_avg = tailbeat(2:end)-tailbeat(1:end-1);
+        mean_period = mean(period_avg);
+        frps = 40;
+        tail_freq = frps/mean_period;
+        wave_sp = tail_freq*avg_wvln;
+        ampl=0.5*(max(z(end,:)-min(z(end,:))))
     end
 end
