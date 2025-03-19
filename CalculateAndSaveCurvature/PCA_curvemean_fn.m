@@ -16,6 +16,8 @@ kappa_val = zeros(npt,nfr);
 smoothedKappa = zeros(size(kappa_val));
 
 % Smoothing code found on mathworks site
+ % Used a butterworth filter, from reading it looked like it was a good
+    % one? 
 for j = 1:nfr
 
     kappa_val(:,j)=calculateCurvature([xn(:,j) yn(:,j)]);
