@@ -12,10 +12,10 @@ set(0,'DefaultAxesFontSize',18)
 screen_size = get(0, 'ScreenSize');
 npt=321;
 nlines=4;
-allfiles= ["HM0NSAR2","HM4NSAR2","AO50NF","AO50N4","AO150NF","AO150N4","SL50NF","SL50N4","SL50N4x10","SL150NF","SL150N4","SL150N4x10"]; %% ,"HM4NSAR2"%% ,
-dirnames = ["VP5","V1","V2","V10"];
-% % allfiles= ["HM0NSAR2"]; %% ,"HM4NSAR2"%% ,
-% % dirnames = ["V1"];
+% % allfiles= ["HM0NSAR2","HM4NSAR2","AO50NF","AO50N4","AO150NF","AO150N4","SL50NF","SL50N4","SL50N4x10","SL150NF","SL150N4","SL150N4x10"]; %% ,"HM4NSAR2"%% ,
+% % dirnames = ["VP5","V1","V2","V10"];
+allfiles= ["HM0NSAR2"]; %% ,"HM4NSAR2"%% 
+dirnames = ["V1"];
 
 figure(1)
 tiledlayout(length(dirnames),length(allfiles))
@@ -79,7 +79,9 @@ for i = 1:length(dirnames);
             for k = 1:npt
                 z(k,t)=-x_c(k,t)*yp+y_c(k,t)*xp;
             end
-         
+%             plot(1:321,z(:,t))
+%             axis([0 321 -2 2])
+%             pause(0.1)
         end
             writematrix(z,sprintf('exc_%s_%s.csv',dirnames(i),my_file));
         

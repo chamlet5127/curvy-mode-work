@@ -27,14 +27,29 @@ for i = 1:length(dirnames);
         file_name=fullfile('./',dirnames(i),my_file);
             z = readmatrix(sprintf('exc_%s_%s.csv',dirnames(i),my_file));
             [m,n]=size(z)
+        ctr = 1
         for t = 40:n
             findpeaks(z(:,t))
             title(sprintf('t=%f',t))
             pause(0.1)
             [pks, locs] = findpeaks(z(:,t));
+           
+            if length(locs) > 1
+                wvln(ctr)=locs(2)-locs(1);
+                ctr=ctr + 1;
+            end
             pk_track(t)=locs(end);
         end
+        avg_wvln = 4*pi/320*mean(wvln);
             % keyboard   
-        
+        % find peak timing
+        counter = 1;
+        for t=40:n
+            if pk_track(t)<pk_track(t-1)
+                tailbeat(counter)=t;
+                counter=counter + 1;
+            end
+        end
+        period_avg = tailbeat(2:end)-tailbeat(1:end-1);
     end
 end
