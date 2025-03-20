@@ -17,8 +17,8 @@ nlines=4;
 allfiles= ["HM0NSAR2"]; %% ,"HM4NSAR2"%% 
 dirnames = ["V1"];
 
-figure(1)
-tiledlayout(length(dirnames),length(allfiles))
+% figure(1)
+% tiledlayout(length(dirnames),length(allfiles))
 
 for i = 1:length(dirnames)
     for j = 1:length(allfiles)
@@ -63,7 +63,7 @@ for i = 1:length(dirnames)
             comy(k) = trapz(sn(:,k),...
                 [0; yn(1:end-1,k).*width(1:end-1,k); 0] ./ area(k));
         end
-
+        comsave=[comx;comy];
         for t = 1:nfr
 
             x_c(:,t)=xn(:,t)-comx(t);
@@ -72,7 +72,7 @@ for i = 1:length(dirnames)
             bigX=[x_c(:,t)';y_c(:,t)'];
 
             [A,Sig,B]=svd(bigX);
-
+            bodyA(:,t)=A(:,1);
             xp=A(1,1);
             yp=A(2,1);
 
@@ -83,8 +83,12 @@ for i = 1:length(dirnames)
 %             axis([0 321 -2 2])
 %             pause(0.1)
         end
-        writematrix(z,sprintf('Excursions/Abodyaxis_%s_%s.csv',dirnames(i),my_file));            
+
+        writematrix(bodyA,sprintf('Excursions/Abodyaxis_%s_%s.csv',dirnames(i),my_file));            
         writematrix(z,sprintf('Excursions/exc_%s_%s.csv',dirnames(i),my_file));
-        
+        writematrix(comsave,sprintf('Excursions/com_%s_%s.csv',dirnames(i),my_file));
+        writematrix(comsave,sprintf('Excursions/bodypos_%s_%s.csv',dirnames(i),my_file));
+        writematrix(xn,sprintf('Excursions/bodyposX_%s_%s.csv',dirnames(i),my_file));
+        writematrix(yn,sprintf('Excursions/bodyposY_%s_%s.csv',dirnames(i),my_file));
     end
 end
