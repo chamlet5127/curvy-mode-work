@@ -20,12 +20,12 @@ dirnames = ["V1"];
 figure(1)
 tiledlayout(length(dirnames),length(allfiles))
 
-for i = 1:length(dirnames);
-    for j = 1:length(allfiles);
+for i = 1:length(dirnames)
+    for j = 1:length(allfiles)
         my_file=allfiles(j);
 
         file_name=fullfile('./',dirnames(i),my_file);
-        XY = dlmread(file_name);
+        XY = dlmread(file_name); %look at changing to readmatrix
         [m,n]=size(XY);
         nfr = m/(npt*4);
         XY = dlmread(file_name);
@@ -83,7 +83,8 @@ for i = 1:length(dirnames);
 %             axis([0 321 -2 2])
 %             pause(0.1)
         end
-            writematrix(z,sprintf('exc_%s_%s.csv',dirnames(i),my_file));
+        writematrix(z,sprintf('Excursions/Abodyaxis_%s_%s.csv',dirnames(i),my_file));            
+        writematrix(z,sprintf('Excursions/exc_%s_%s.csv',dirnames(i),my_file));
         
     end
 end
