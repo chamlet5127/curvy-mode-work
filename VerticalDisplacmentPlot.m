@@ -16,7 +16,7 @@ tiledlayout('flow')
 % few ran
 
 % allfiles= ["HM0NSAR2","HM4NSAR2","AO50NF","AO50N4","AO150NF","AO150N4","SL50NF","SL50N4","SL50N4x10","SL150NF","SL150N4","SL150N4x10"]; %% ,"HM4NSAR2"%% ,
-allfiles= ["HM0NSAR2","HM4NSAR2","SL50NF","SL50N4","SL50N4x10","SL150NF","SL150N4","SL150N4x10"]; %% ,"HM4NSAR2"%% ,
+allfiles= ["HM0NSAR2","HM4NSAR2","AO50NF","AO50N4","AO150NF","AO150N4"]; %% ,"HM4NSAR2"%% ,
 dirnames = ["V1","V2","V10"];
 
 for i = 1:length(dirnames);
@@ -29,6 +29,6 @@ for i = 1:length(dirnames);
         title(sprintf('tail, %s-%s',dirnames(i),allfiles(j)))
         % colorbar
         grid on
-        %axis([0 350 -0.15 0.15])
+        axis([0 600 -2 3])
     end
 end
