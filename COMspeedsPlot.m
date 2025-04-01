@@ -14,7 +14,7 @@ cm_mymap=viridis();
 % This was the main filewrite, the x20 was done later. If it needs to be
 % redone uncomment the lines below.
 allfiles= ["HM0NSAR2","HM4NSAR2","AO50NF","AO50N4","AO150NF","AO150N4","SL50NF","SL50N4","SL50N4x10","SL150NF","SL150N4","SL150N4x10"]; %% ,"HM4NSAR2"%% ,
-dirnames = ["VP5","V1","V2","V10"];
+dirnames = ["V1","V2","V10"];
 
 
 % These are only for the x20 runs that I did later and separately
@@ -66,7 +66,7 @@ for i = 1:length(dirnames);
         % % export_fig(sprintf('./Midlines/mid_%s-%s',dirnames(i),my_file),'-png','-nocrop')
         % % clf
     end
-    legend("x0.5","x1","x2","x10",'Location','NorthEast')
+    legend("x1","x2","x10",'Location','NorthEast')
     title(sprintf('%s',my_file))
     set(j, 'Position', [0 0 0.8*screen_size(3) 0.8*screen_size(4) ] );
     %export_fig(sprintf('./COMSpeed/com_%s',my_file),'-png','-nocrop')
