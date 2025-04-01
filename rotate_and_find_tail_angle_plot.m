@@ -78,7 +78,7 @@ function [x_rot, y_rot, theta_tail_rad, vertical_dist, d_x_updated, d_y_updated,
     % Plot body
     plot(x, y, 'bo-', 'LineWidth', 2); % Original shape
     plot(x_rot, y_rot, 'go-', 'LineWidth', 2); % Rotated shape
-
+   
     % Plot center of mass
     scatter(x_c, y_c, 50, 'r', 'filled');
 
@@ -106,6 +106,7 @@ function [x_rot, y_rot, theta_tail_rad, vertical_dist, d_x_updated, d_y_updated,
     xlabel('X Position');
     ylabel('Y Position');
     axis equal;
+    axis([-30 30 0 50])
     grid on;
     legend('Original Body', 'Rotated Body', 'Center of Mass', ...
            'Principal Axis', 'Tail Fit Line', 'Tail Direction Vector');
