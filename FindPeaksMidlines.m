@@ -25,13 +25,14 @@ for i = 1:length(dirnames);
         my_file=allfiles(j);
 
         file_name=fullfile('./',dirnames(i),my_file);
-            z = readmatrix(sprintf('exc_%s_%s.csv',dirnames(i),my_file));
+            z = readmatrix(sprintf('Excursions/exc_%s_%s.csv',dirnames(i),my_file));
+            comspeed = readmatrix(sprintf('Excursions/comspeed_%s_%s.csv',dirnames(i),my_file));
             [m,n]=size(z)
         ctr = 1
         for t = 40:n
-            findpeaks(z(:,t))
-            title(sprintf('t=%f',t))
-            pause(0.1)
+            % % findpeaks(z(:,t))
+            % % title(sprintf('t=%f',t))
+            % % pause(0.1)
             [pks, locs] = findpeaks(z(:,t));
            
             if length(locs) > 1
@@ -40,7 +41,8 @@ for i = 1:length(dirnames);
             end
             pk_track(t)=locs(end);
         end
-        avg_wvln = 4*pi/320*mean(wvln);
+        % avg_wvln = 4*pi/320*mean(wvln);
+        avg_wvln = 1/320*mean(wvln);
             % keyboard   
         % find peak timing
         counter = 1;
@@ -50,11 +52,14 @@ for i = 1:length(dirnames);
                 counter=counter + 1;
             end
         end
+        avg_speed = mean(comspeed(400:end));
         period_avg = tailbeat(2:end)-tailbeat(1:end-1);
         mean_period = mean(period_avg);
         frps = 40;
         tail_freq = frps/mean_period;
         wave_sp = tail_freq*avg_wvln;
-        ampl=0.5*(max(z(end,:)-min(z(end,:))))
+        ampl=0.5*(max(z(end,:)-min(z(end,:))));
+        str_len = avg_speed/(4*pi*tail_freq);
+        Str_no = 2*tail_freq*ampl/avg_speed;
     end
 end

@@ -56,7 +56,7 @@ for i = 1:length(dirnames);
 
         [width1,area1,sn1, comx1,comy1,comvelx1,comvely1] = estcomspeed(my_time,xm,ym,xn,yn,xl,xr,yl,yr);
         com_speed = sqrt(comvelx1.^2 + comvely1.^2);
-
+        writematrix(com_speed,sprintf('Excursions/comspeed_%s_%s.csv',dirnames(i),my_file));
         plot(my_time,com_speed,'Color',cm_mymap(i*60,:))
         axis([0 15 0 8])
         hold on
@@ -69,7 +69,7 @@ for i = 1:length(dirnames);
     legend("x0.5","x1","x2","x10",'Location','NorthEast')
     title(sprintf('%s',my_file))
     set(j, 'Position', [0 0 0.8*screen_size(3) 0.8*screen_size(4) ] );
-    export_fig(sprintf('./COMSpeed/com_%s',my_file),'-png','-nocrop')
+    %export_fig(sprintf('./COMSpeed/com_%s',my_file),'-png','-nocrop')
 
     
 end
